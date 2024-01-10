@@ -18,7 +18,6 @@ const updateSW = registerSW({
   },
 });
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 1000 * 10 } },
 });

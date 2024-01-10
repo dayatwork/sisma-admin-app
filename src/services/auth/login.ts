@@ -23,7 +23,7 @@ export async function login(input: LoginInput) {
   });
 
   if (!res.ok) {
-    throw res.json();
+    throw await res.json();
   }
 
   return res.json() as Promise<LoginResponse>;
