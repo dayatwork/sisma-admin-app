@@ -8,6 +8,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import { Toaster } from "./components/ui/sonner";
 import "./index.css";
+import { isBrowser } from "react-device-detect";
 
 // add this to prompt for a refresh
 const updateSW = registerSW({
@@ -27,7 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <Toaster />
-      <ReactQueryDevtools />
+      {isBrowser && <ReactQueryDevtools />}
     </QueryClientProvider>
   </React.StrictMode>
 );

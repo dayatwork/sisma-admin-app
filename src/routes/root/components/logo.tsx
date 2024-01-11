@@ -4,7 +4,9 @@ export function Logo({ isCollapsed }: { isCollapsed: boolean }) {
       className="h-16 px-[22px] border-b flex items-center"
       style={{ justifyContent: isCollapsed ? "center" : "flex-start" }}
     >
-      <p className="text-xl font-bold">{isCollapsed ? "S" : "SISMA Admin"}</p>
+      <p className="text-xl font-bold whitespace-nowrap">
+        {isCollapsed ? "S" : "SISMA Admin"}
+      </p>
     </div>
   );
 }
