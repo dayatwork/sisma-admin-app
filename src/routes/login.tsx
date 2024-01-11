@@ -30,7 +30,10 @@ export async function action({ request }: ActionFunctionArgs) {
 
   try {
     const { email, password } = submission.value;
-    await login({ email, password });
+    const res = await login({ email, password });
+    // if (isMobile) {
+    localStorage.setItem("accessToken", res.data.accessToken);
+    // }
     return redirect("/dashboard");
   } catch (err) {
     const error = err as { message: string };
@@ -70,7 +73,12 @@ export default function Login() {
           <div className="space-y-4">
             <div className="grid gap-1">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" {...conform.input(email)} />
+              <Input
+                id="email"
+                type="email"
+                autoComplete="username"
+                {...conform.input(email)}
+              />
               <p className="text-sm text-red-600 font-semibold">
                 {email.error}
               </p>
@@ -80,6 +88,7 @@ export default function Login() {
               <Input
                 id="password"
                 type="password"
+                autoComplete="current-password"
                 {...conform.input(password)}
               />
               <p className="text-sm text-red-600 font-semibold">

@@ -23,10 +23,12 @@ export type GetLoggedInUserResponse = {
   };
 };
 
-export async function getLoggedInUser(signal?: AbortSignal) {
+export async function getLoggedInUser(signal?: AbortSignal, token?: string) {
+  console.log("token", token);
   const res = await fetch(`${API_URL}/auth/me`, {
     method: "GET",
     credentials: "include",
+    headers: { authorization: `Bearer ${token}` },
     signal,
   });
 

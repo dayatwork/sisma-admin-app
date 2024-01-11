@@ -74,3 +74,75 @@
     @apply bg-background text-foreground;
   }
 }
+
+#reader {
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 10px;
+  padding: 12px !important;
+}
+
+#reader__scan_region {
+  display: flex;
+  justify-content: center;
+}
+
+#html5-qrcode-button-camera-permission {
+  padding: 8px 20px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+#html5-qrcode-button-camera-start {
+  padding: 8px 20px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#html5-qrcode-button-camera-stop {
+  padding: 8px 20px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#html5-qrcode-select-camera {
+  padding: 8px 20px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+#html5-qrcode-button-camera-permission:hover,
+#html5-qrcode-button-camera-permission:active {
+  opacity: 90%;
+}
+
+#html5-qrcode-anchor-scan-type-change {
+  padding: 10px 20px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+#html5-qrcode-anchor-scan-type-change:hover,
+#html5-qrcode-anchor-scan-type-change:active {
+  background-color: hsl(var(--accent)) ;
+}
+
+#reader__dashboard_section_csr {
+  padding: 10px 0;
+}

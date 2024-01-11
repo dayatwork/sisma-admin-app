@@ -1,5 +1,11 @@
 import { useMemo, useState } from "react";
-import { Outlet, redirect, useLocation } from "react-router-dom";
+import {
+  LoaderFunctionArgs,
+  Outlet,
+  json,
+  // redirect,
+  useLocation,
+} from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { useMediaQuery } from "usehooks-ts";
 import {
@@ -13,8 +19,8 @@ import {
   Users2,
 } from "lucide-react";
 
-import { queryClient } from "@/main";
-import { getLoggedInUser } from "@/services/auth/me";
+// import { queryClient } from "@/main";
+// import { getLoggedInUser } from "@/services/auth/me";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -24,16 +30,19 @@ import { UserNav } from "./components/user-nav";
 import { MobileNav } from "./components/mobile-nav";
 import { Button } from "../../components/ui/button";
 
-export async function loader() {
-  try {
-    const response = await getLoggedInUser();
-    return queryClient.fetchQuery({
-      queryKey: ["me"],
-      queryFn: () => response,
-    });
-  } catch (error) {
-    return redirect("/login");
-  }
+export async function loader({ request }: LoaderFunctionArgs) {
+  // try {
+  //   const accessToken = isMobile ? localStorage.get("accessToken") : undefined;
+  //   const response = await getLoggedInUser(request.signal, accessToken);
+  //   return queryClient.fetchQuery({
+  //     queryKey: ["me"],
+  //     queryFn: () => response,
+  //   });
+  // } catch (error) {
+  //   return redirect("/login");
+  // }
+  console.log(request.body);
+  return json({ message: "OK" });
 }
 
 export default function Root() {
