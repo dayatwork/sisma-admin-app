@@ -31,7 +31,7 @@ export async function action({ request }: ActionFunctionArgs) {
   try {
     const { email, password } = submission.value;
     await login({ email, password });
-    return redirect("/");
+    return redirect("/dashboard");
   } catch (err) {
     const error = err as { message: string };
     return json({ submission, error: error.message });
@@ -52,8 +52,6 @@ export default function Login() {
     },
     shouldRevalidate: "onBlur",
   });
-
-  console.log({ actionData });
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
