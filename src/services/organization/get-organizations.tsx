@@ -7,6 +7,7 @@ export type GetOrganizationsResponse = {
   data: {
     id: string;
     name: string;
+    code: string;
     type: "SUPPLIER" | "HEALTHCARE_PROVIDER" | "GOVERNMENT" | null;
     logo: string | null;
     province: string | null;
@@ -20,8 +21,19 @@ export type GetOrganizationsResponse = {
 
 export const ORGANIZATIONS_KEY = "organizations";
 
-export async function getOrganizations(signal?: AbortSignal) {
-  const res = await fetch(`${API_URL}/organizations`, {
+type GetOrganizationsParams = {
+  search?: string;
+};
+
+export async function getOrganizations(
+  signal?: AbortSignal,
+  params?: GetOrganizationsParams
+) {
+  const URL = params
+    ? `${API_URL}/organizations?` + new URLSearchParams(params)
+    : `${API_URL}/organizations`;
+
+  const res = await fetch(URL, {
     method: "GET",
     credentials: "include",
     signal,
@@ -34,16 +46,16 @@ export async function getOrganizations(signal?: AbortSignal) {
   return res.json() as Promise<GetOrganizationsResponse>;
 }
 
-export const useOrganizations = () => {
+export const useOrganizations = (params?: GetOrganizationsParams) => {
   return useQuery<GetOrganizationsResponse>({
-    queryKey: [ORGANIZATIONS_KEY],
-    queryFn: ({ signal }) => getOrganizations(signal),
+    queryKey: [ORGANIZATIONS_KEY, params],
+    queryFn: ({ signal }) => getOrganizations(signal, params),
   });
 };
 
-export const fetchOrganizations = () => {
+export const fetchOrganizations = (params?: GetOrganizationsParams) => {
   return queryClient.fetchQuery({
-    queryKey: [ORGANIZATIONS_KEY],
-    queryFn: ({ signal }) => getOrganizations(signal),
+    queryKey: [ORGANIZATIONS_KEY, params],
+    queryFn: ({ signal }) => getOrganizations(signal, params),
   });
 };
