@@ -49,9 +49,9 @@ export default function Root() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
   const pathname = location.pathname;
-  const matches = useMediaQuery("(min-width: 1025px)");
+  const collapsible = useMediaQuery("(min-width: 1025px)");
 
-  const mini = isCollapsed || !matches;
+  const mini = isCollapsed || !collapsible;
 
   const links = useMemo(
     () =>
@@ -122,22 +122,24 @@ export default function Root() {
           )}
         >
           <Logo isCollapsed={mini} />
-          <div className="px-2 py-2 border-b">
-            <Button
-              variant="secondary"
-              className={cn(
-                "w-full flex",
-                mini ? "justify-center" : "justify-start"
-              )}
-              onClick={() => setIsCollapsed((prev) => !prev)}
-              size={mini ? "icon" : "default"}
-            >
-              <ArrowLeftToLine
-                className={cn("w-5 h-5 mr-2", mini ? "rotate-180" : "mr-2")}
-              />
-              {!mini && <span>Collapse</span>}
-            </Button>
-          </div>
+          {collapsible && (
+            <div className="px-2 py-2 border-b">
+              <Button
+                variant="secondary"
+                className={cn(
+                  "w-full flex",
+                  mini ? "justify-center" : "justify-start"
+                )}
+                onClick={() => setIsCollapsed((prev) => !prev)}
+                size={mini ? "icon" : "default"}
+              >
+                <ArrowLeftToLine
+                  className={cn("w-5 h-5 mr-2", mini ? "rotate-180" : "mr-2")}
+                />
+                {!mini && <span>Collapse</span>}
+              </Button>
+            </div>
+          )}
           <Nav isCollapsed={mini} links={links} />
         </div>
 

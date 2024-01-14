@@ -24,12 +24,14 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CodeScanner } from "@/components/code-scanner";
 import { useState } from "react";
+import { FullCodeScanner } from "@/components/scanner/full-code-scanner";
+// import { CodeScanner } from "@/components/scanner/code-scanner";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const search = new URL(request.url).searchParams.get("search") || "";
@@ -78,7 +80,7 @@ export default function Organizations() {
                 <DialogTitle>Scan Organization Code</DialogTitle>
                 <DialogDescription>Scan QR Code or Barcode</DialogDescription>
               </DialogHeader>
-              <CodeScanner
+              <FullCodeScanner
                 onResult={(result) => {
                   setSearchParams((prev) => {
                     prev.set("search", result);
@@ -90,6 +92,15 @@ export default function Organizations() {
                   console.log(error);
                 }}
               />
+              <DialogFooter>
+                <Button
+                  variant="secondary"
+                  className="w-full"
+                  onClick={() => setScannerOpen(false)}
+                >
+                  Close Scanner
+                </Button>
+              </DialogFooter>
             </DialogContent>
           </Dialog>
         </div>
